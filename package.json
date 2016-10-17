@@ -1,0 +1,31 @@
+{
+  "name": "filebuilder",
+  "version": "1.0.0",
+  "description": "Module to build file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scorpionsk5/FileBuilder.git"
+  },
+  "keywords": [
+    "file",
+    "builder",
+    "filebuilder",
+    "blob",
+    "blobbuilder"
+  ],
+  "author": "Shashi  Kumar D",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scorpionsk5/FileBuilder/issues"
+  },
+  "homepage": "https://github.com/scorpionsk5/FileBuilder#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "minify": "^2.0.12",
+    "path": "^0.12.7"
+  }
+}
