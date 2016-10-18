@@ -43,6 +43,18 @@
             };
 
             return extension;
+        },
+
+        // Helper Method to extend first order properties of objects.
+        extend: function () {
+            var newObject = {};
+            for (var idx in arguments) {
+                for (var objName in arguments[idx]) {
+                    newObject[objName] = arguments[idx][objName];
+                };
+            };
+
+            return newObject;
         }
     };
 
@@ -58,7 +70,7 @@
 
     var FileBuilder = function (options) {
         var me = this;
-        me.config = $.extend(true, getDefaultConfig(), options || {});
+        me.config = utils.extend(getDefaultConfig(), options || {});
         me.fileContentString = '';
 
         // Register if any new file handler plugins.
@@ -105,7 +117,7 @@
             handlers = me._fileHandlers[me.config.fileExtension];
 
         for (var item in handlers) {
-            if (handlers.hasOwnProperty(item) && utils.isFunction(item)) {
+            if (handlers.hasOwnProperty(item) && utils.isFunction(handlers[item])) {
                 me[item] = handlers[item];
             };
         };
@@ -136,11 +148,26 @@
     };
 
     FileBuilder.prototype._fileHandlers = {
-        rtf: function () {
-            return {
-                name: 'rtf'
-            };
+        rtf: {
+            name: 'rtf',
+            appendParagraph: function (text) {
+                
+            },
+            appendHeader: function (text, level) {
+
+            },
+            appendNote: function (text) {
+
+            },
+            initFile: function () {
+
+            },
+            finalizeFile: function () {
+
+            }
         }
     };
+
+    window.FileBuilder = FileBuilder;
 
 })(window);
