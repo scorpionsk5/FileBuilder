@@ -11,13 +11,13 @@
             return (typeof item === 'string');
         },
         isArray: function (item) {
-            if (utils.isObject(item) && item.push && item.unshift) {
+            if ((Array.isArray && Array.isArray(item) || (Object.prototype.toString.call(item) == '[object Array]'))) {
                 return true;
             };
             return false;
         },
         isObject: function (item) {
-            return (typeof item === 'object');
+            return (Object.prototype.toString.call(item) == '[object Object]');
         },
         isFunction: function (item) {
             return (typeof item === 'function');
@@ -151,7 +151,7 @@
         rtf: {
             name: 'rtf',
             appendParagraph: function (text) {
-                
+
             },
             appendHeader: function (text, options) {
 
@@ -159,10 +159,7 @@
             appendNote: function (text) {
 
             },
-            initFile: function () {
-
-            },
-            finalizeFile: function () {
+            appendPlainText: function (text) {
 
             }
         }
