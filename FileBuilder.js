@@ -153,7 +153,7 @@
             appendParagraph: function (text) {
                 
             },
-            appendHeader: function (text, level) {
+            appendHeader: function (text, options) {
 
             },
             appendNote: function (text) {
