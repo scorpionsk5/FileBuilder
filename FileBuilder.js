@@ -11,7 +11,7 @@
             return (typeof item === 'string');
         },
         isArray: function (item) {
-            if ((Array.isArray && Array.isArray(item) || (Object.prototype.toString.call(item) == '[object Array]'))) {
+            if ((Array.isArray && Array.isArray(item)) || (Object.prototype.toString.call(item) == '[object Array]')) {
                 return true;
             };
             return false;
@@ -24,7 +24,7 @@
         },
         parseExtension: function (extension) {
             if (!extension && !utils.isString(extension)) {
-                this.config.showError.call(this, 'Extension must be a valid extension string. Default extension "rtf" will be used.');
+                this.config.showError.call(this, 'Extension must be a valid extension string. Default extension "txt" will be used.');
                 return false;
             };
 
@@ -37,7 +37,7 @@
                     this.config.showError.call(this, 'Multiple extension is not supported. "' + extension + '" will be used.');
                 }
                 else {
-                    this.config.showError.call(this, 'Invalid Extension or FileBuilder does not support "' + extension + '" extension. Default extension "rtf" will be used.');
+                    this.config.showError.call(this, 'Invalid extension or FileBuilder does not support "' + extension + '" extension. Default extension "txt" will be used.');
                     return false;
                 };
             };
@@ -63,7 +63,7 @@
             showWarning: utils.showWarning,
             showError: utils.showError,
             fileName: 'Export',
-            fileExtension: 'rtf',
+            fileExtension: 'txt',
             fileHandlerPlugins: null
         };
     };
@@ -78,7 +78,7 @@
             me._registerNewPlugins(me.config.fileHandlerPlugins);
         };
 
-        me.config.fileExtension = utils.parseExtension.call(me, me.config.fileExtension) || 'rtf';
+        me.config.fileExtension = utils.parseExtension.call(me, me.config.fileExtension) || 'txt';
 
         me._loadHandlers();
     };
@@ -148,19 +148,10 @@
     };
 
     FileBuilder.prototype._fileHandlers = {
-        rtf: {
-            name: 'rtf',
-            appendParagraph: function (text) {
-
-            },
-            appendHeader: function (text, options) {
-
-            },
-            appendNote: function (text) {
-
-            },
-            appendPlainText: function (text) {
-
+        txt: {
+            name: 'txt',
+            appendText: function (text) {
+                this.fileContentString = this.fileContentString + text + ' \n ';
             }
         }
     };
