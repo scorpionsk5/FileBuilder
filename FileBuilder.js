@@ -23,7 +23,7 @@
             return (typeof item === 'function');
         },
         parseExtension: function (extension) {
-            if (!extension && !utils.isString(extension)) {
+            if (!extension || !utils.isString(extension)) {
                 this.config.showError.call(this, 'Extension must be a valid extension string. Default extension "txt" will be used.');
                 return false;
             };
@@ -34,7 +34,7 @@
 
             if (extArray.length > 1) {
                 if (this._fileHandlers[extension]) {
-                    this.config.showError.call(this, 'Multiple extension is not supported. "' + extension + '" will be used.');
+                    this.config.showWarning.call(this, 'Multiple extension is not supported. "' + extension + '" will be used.');
                 }
                 else {
                     this.config.showError.call(this, 'Invalid extension or FileBuilder does not support "' + extension + '" extension. Default extension "txt" will be used.');
@@ -87,7 +87,7 @@
         var elem = document.createElement('a'),
             blob = new Blob([this.fileContentString], { type: 'application/octet-stream' }),
             config = this.config,
-            fileName = (config.fileName || 'NoName') + '.' + config.fileExtension;
+            fileName = (config.fileName) + '.' + config.fileExtension;
 
         if (window.navigator.msSaveBlob) {
             // for IE
