@@ -1,12 +1,6 @@
 ﻿(function (window) {
 
     var utils = {
-        showWarning: function (message) {
-            console.warn(message);
-        },
-        showError: function (message) {
-            console.error(message);
-        },
         isString: function (item) {
             return (typeof item === 'string');
         },
@@ -16,8 +10,11 @@
             };
             return false;
         },
+        isPlainObject: function (item) {
+            return Object.prototype.toString.call(item) == '[object Object]';
+        },
         isObject: function (item) {
-            return (Object.prototype.toString.call(item) == '[object Object]');
+            return (typeof item == 'object');
         },
         isFunction: function (item) {
             return (typeof item === 'function');
@@ -60,8 +57,12 @@
 
     var getDefaultConfig = function () {
         return {
-            showWarning: utils.showWarning,
-            showError: utils.showError,
+            showWarning: function (message) {
+                console.warn(message);
+            },
+            showError: function (message) {
+                console.error(message);
+            },
             fileName: 'Export',
             fileExtension: 'txt',
             fileHandlerPlugins: null
@@ -135,7 +136,7 @@
                 };
             });
         }
-        else if (utils.isObject(plugins)) {
+        else if (utils.isPlainObject(plugins)) {
             if (!plugins.name && !utils.isString(plugins.name)) {
                 me.config.showError.call(me, 'Plugin name is required. Plugin object must consist of a "name" property.');
                 return;
